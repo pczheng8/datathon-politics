@@ -2,7 +2,7 @@ import requests
 import csv
 import pandas as pd
 
-api_key = "QTRixbdQbwZIcxKBFe11hXSwjtU2NvABeveVfffc"
+api_key = "MSlqr8knhEU4tZuCrnYEA4Dq9VgF6DLzBZjyHEaV"
 
 # ADDING CANDIDATES
 
@@ -49,36 +49,39 @@ api_key = "QTRixbdQbwZIcxKBFe11hXSwjtU2NvABeveVfffc"
 #         writer.writerow(row)
 
 
-#ADDING ELECTIONEERING
-
-#endpoint for electioneering
-endpoint = 'https://api.open.fec.gov/v1/electioneering/totals/by_candidate'
-
+#ADDING PARTY EXPENDITURES
 df = pd.read_csv("financial_data.csv")
 
-for id in df['id'][:10]:
+party = []
+
+endpoint = 'https://api.open.fec.gov/v1/schedules/schedule_f/'
+
+party = []
+
+for index, row in df.iloc[0:100].iterrows():
     params = {
         'api_key': api_key,
-        'candidate_id': id, 
-        'cycle': '2024',          
+        'candidate_id': row['id'],          # Set to Biden
+        'cycle': row['year'],                      # Set to 2020
         'election_full': True,
-        'per_page': 100,
-        'page': 1   
+        'per_page': 50,                       
+        'page': 1                            
     }
 
-    page = 1
-    while True:
-        params['page'] = page
-        response = requests.get(endpoint, params=params)
+    response = requests.get(endpoint, params=params)
+
+    total_party_coordinated_expenditures = 0
+
+    if response.status_code == 200:
         data = response.json()
-        if 'results' not in data or not data['results']:
-            break
         for item in data.get('results', []):
-            print(f"Total Electioneering Cost: ${item['total']}")
-        page += 1
+            total_party_coordinated_expenditures += item.get('expenditure_amount')
+    else:
+        print("Failed to fetch data:", response.status_code)
 
+    party.append(total_party_coordinated_expenditures)
 
-
+print(party)
 
 
 
