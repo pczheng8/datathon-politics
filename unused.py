@@ -62,3 +62,4 @@ while True:
 # Print the total expenditures for the candidate
 print(f"Total Party-Coordinated Expenditures: ${total_expenditures}")
 
+
