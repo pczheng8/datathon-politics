@@ -106,3 +106,4 @@ for purpose, total_disbursement in disbursements_by_purpose.items():
 # # Print the total expenditures for the candidate
 # print(f"Total Party-Coordinated Expenditures: ${total_expenditures}")
 
+
