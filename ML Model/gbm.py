@@ -4,7 +4,7 @@ from sklearn.metrics import accuracy_score
 import pandas as pd
 
 # will change to final_financial_data.csv, currently this is like a temp file
-df = pd.read_csv("new_csv2.csv")
+df = pd.read_csv("ML Model/new_csv2.csv")
 
 # preprocess and stuff
 X = df[["party expenditures", "independent expenditures", "electioneering costs"]]
