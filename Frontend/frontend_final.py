@@ -5,7 +5,7 @@ from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 
-df = pd.read_csv("ML Model/new_csv2.csv")
+df = pd.read_csv("ML Model/final_financial_data.csv")
 X = df[["party expenditures", "independent expenditures", "electioneering costs"]]
 y = df["won"]
 
