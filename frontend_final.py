@@ -19,6 +19,18 @@ gbm_model.fit(X_train, y_train)
 y_pred = gbm_model.predict(X_test)
 accuracy = accuracy_score(y_test, y_pred) * 100
 
+
+feature_importance = gbm_model.feature_importances_
+feature_names = df.columns  
+
+feature_names = ['party expenditures', 'independent expenditures', 'electioneering costs']  
+
+feature_importance_dict = dict(zip(feature_names, feature_importance))
+sorted_features = sorted(
+    feature_importance_dict.items(), key=lambda x: x[1], reverse=True
+)
+
+
 st.write("""
 # Accuracy  
 """)
@@ -44,7 +56,15 @@ if st.button('Rank Features'):
     st.empty()
     st.write("""
     # Features, ranked
-    # 1. Electioneering Costs
-    # 2. Independent Expenditures
-    # 3. Party Expenditures
-             """)
+    """)
+    for i, (feature, importance) in enumerate(sorted_features, start=1):
+        st.write(f"{i}. {feature}")
+
+    fig, ax = plt.subplots(figsize=(10, 8))
+    features, importances = zip(*sorted_features)
+    ax.bar(features, importances, color='skyblue')
+    ax.set_xlabel('Features')
+    ax.set_ylabel('Importance')
+    ax.set_title('Relative Importance of Features')
+    plt.xticks(rotation=45)
+    st.pyplot(fig)
