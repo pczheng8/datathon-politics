@@ -1,13 +1,19 @@
 from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
+import pandas as pd
 
-#preprocess and stuff
-X = ...
-y = ...
+# will change to final_financial_data.csv, currently this is like a temp file
+df = pd.read_csv("new_csv2.csv")
+
+# preprocess and stuff
+X = df[["party expenditures", "independent expenditures", "electioneering costs"]]
+y = df["won"]
 
 # Split data into training and testing sets
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
 
 # Train Gradient Boosting Machine (GBM) model
 gbm_model = GradientBoostingClassifier()
@@ -21,15 +27,18 @@ print("Accuracy:", accuracy)
 
 # Get feature importance scores
 feature_importance = gbm_model.feature_importances_
+# print(feature_importance)
 
 # Get feature names
-feature_names = X.columns  # Assuming X is a pandas DataFrame with column names
+feature_names = df.columns  # Assuming X is a pandas DataFrame with column names
 
 # Create a dictionary mapping feature names to importance scores
 feature_importance_dict = dict(zip(feature_names, feature_importance))
 
 # Sort features by importance score in descending order
-sorted_features = sorted(feature_importance_dict.items(), key=lambda x: x[1], reverse=True)
+sorted_features = sorted(
+    feature_importance_dict.items(), key=lambda x: x[1], reverse=True
+)
 
 # Print or visualize the ranking of features
 for feature, importance in sorted_features:
