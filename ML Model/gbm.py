@@ -11,32 +11,26 @@ df = pd.read_csv("ML Model/new_csv2.csv")
 X = df[["party expenditures", "independent expenditures", "electioneering costs"]]
 y = df["won"]
 
-# Split data into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=None
 )
 
-# Train Gradient Boosting Machine (GBM) model
 gbm_model = GradientBoostingClassifier()
 gbm_model.fit(X_train, y_train)
 
-# Evaluate model
 y_pred = gbm_model.predict(X_test)
 accuracy = accuracy_score(y_test, y_pred)
 print("Accuracy:", accuracy)
 
 
-# Get feature importance scores
 feature_importance = gbm_model.feature_importances_
-# print(feature_importance)
+feature_names = df.columns  
 
 # Get feature names
 feature_names = ['party expenditures', 'independent expenditures', 'electioneering costs']  # Assuming X is a pandas DataFrame with column names
 
 # Create a dictionary mapping feature names to importance scores
 feature_importance_dict = dict(zip(feature_names, feature_importance))
-
-# Sort features by importance score in descending order
 sorted_features = sorted(
     feature_importance_dict.items(), key=lambda x: x[1], reverse=True
 )
@@ -56,15 +50,10 @@ plt.show()
 for feature, importance in sorted_features:
     print(f"{feature}: {importance}")
 
-# Now we want to see what the predictions are
 prediction = gbm_model.predict(X_test)
 df2 = pd.DataFrame(prediction, columns=["output"])
-# for index, row in df2.iterrows():
-#    if prediction == 1:
-#        print(row)
 
 
 df2_filtered = df2[df2["output"] == 1]
 
-# Print the filtered rows
 print(df2_filtered)
