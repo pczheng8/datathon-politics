@@ -5,7 +5,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # will change to final_financial_data.csv, currently this is like a temp file
-df = pd.read_csv("ML Model/new_csv2.csv")
+df = pd.read_csv("ML Model/final_financial_data.csv")
 
 # preprocess and stuff
 X = df[["party expenditures", "independent expenditures", "electioneering costs"]]
