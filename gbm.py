@@ -12,7 +12,7 @@ y = df["won"]
 
 # Split data into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42
+    X, y, test_size=0.2, random_state=None
 )
 
 # Train Gradient Boosting Machine (GBM) model
@@ -43,3 +43,16 @@ sorted_features = sorted(
 # Print or visualize the ranking of features
 for feature, importance in sorted_features:
     print(f"{feature}: {importance}")
+
+# Now we want to see what the predictions are
+prediction = gbm_model.predict(X_test)
+df2 = pd.DataFrame(prediction, columns=["output"])
+# for index, row in df2.iterrows():
+#    if prediction == 1:
+#        print(row)
+
+
+df2_filtered = df2[df2["output"] == 1]
+
+# Print the filtered rows
+print(df2_filtered)
