@@ -26,10 +26,8 @@ print("Accuracy:", accuracy)
 feature_importance = gbm_model.feature_importances_
 feature_names = df.columns  
 
-# Get feature names
-feature_names = ['party expenditures', 'independent expenditures', 'electioneering costs']  # Assuming X is a pandas DataFrame with column names
+feature_names = ['party expenditures', 'independent expenditures', 'electioneering costs']  
 
-# Create a dictionary mapping feature names to importance scores
 feature_importance_dict = dict(zip(feature_names, feature_importance))
 sorted_features = sorted(
     feature_importance_dict.items(), key=lambda x: x[1], reverse=True
@@ -37,16 +35,14 @@ sorted_features = sorted(
 
 features, importances = zip(*sorted_features)
 
-# Creating the bar graph
-plt.figure(figsize=(10, 8))  # You can adjust the figure size as needed
-plt.bar(features, importances, color='skyblue')  # You can change the color
+plt.figure(figsize=(10, 8))  
+plt.bar(features, importances, color='skyblue') 
 plt.xlabel('Features')
 plt.ylabel('Importance')
 plt.title('Relative Importance of Features')
-plt.xticks(rotation=45)  # Rotates the x-axis labels to avoid overlap
+plt.xticks(rotation=45) 
 plt.show()
 
-# Print or visualize the ranking of features
 for feature, importance in sorted_features:
     print(f"{feature}: {importance}")
 
