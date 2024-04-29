@@ -2,7 +2,7 @@ import requests
 import csv
 import pandas as pd
 
-api_key = "MSlqr8knhEU4tZuCrnYEA4Dq9VgF6DLzBZjyHEaV"
+api_key = "********************"
 
 
 # ADDING CANDIDATES

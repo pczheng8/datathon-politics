@@ -1,6 +1,6 @@
 import requests
 
-api_key = 'QTRixbdQbwZIcxKBFe11hXSwjtU2NvABeveVfffc'
+api_key = '********************'
 #endpoint for electioneering
 endpoint = 'https://api.open.fec.gov/v1/electioneering/totals/by_candidate'
 

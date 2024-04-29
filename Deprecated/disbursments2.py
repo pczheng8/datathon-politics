@@ -1,6 +1,6 @@
 import requests
 
-api_key = 'QTRixbdQbwZIcxKBFe11hXSwjtU2NvABeveVfffc'
+api_key = '********************'
 
 endpoint = 'https://api.open.fec.gov/v1/schedules/schedule_b/'
 
